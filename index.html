@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Earl Lawrence Alonzo - SM Customer Experience Survey</title>
+  <style>
+    * {
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: aliceblue;
+      margin: 0;
+      padding: 3vh 10vw;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto 1vh auto;
+    }
+
+    h1, h2, h4 {
+      text-align: center;
+      margin: 0.5vh 0;
+      color: darkblue;
+    }
+
+    form {
+      background-color: white;
+      padding: 3vh 4vw;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 0vh 35vh;
+    }
+
+    fieldset {
+      margin-bottom: 3vh;
+      text-align: center;
+      padding: 2vh 0vw;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    legend {
+      font-weight: bold;
+      font-size: 20px;
+      text-align: center;
+      padding: 0vh 3vw;
+      color: darkblue;
+    }
+
+    label {
+      display: inline-block;
+      width: 160px;
+      margin-bottom: 1vh;
+      font-weight: bold;
+    }
+
+
+
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 50%;
+      padding: 0.5vh;
+      margin-bottom: 1.5vh;
+    }
+
+    p{
+      font-weight: bold;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-top: 2vh;
+    }
+
+    .reset{
+      padding: 1vh 2vw;
+      margin: 0 1vw;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: rgb(187, 2, 2);
+      color: white;
+      border-style: none;
+    }
+
+    .submit {
+          padding: 1vh 2vw;
+      margin: 0 1vw;
+      font-weight: bold;
+      cursor: pointer;
+      background-color: darkblue;
+      color: white;
+      border-style: none;
+      
+    }
+
+    .personalInfo {
+       margin-left: -7vh;
+    }
+  </style>
+</head>
+<body>
+
+  <img src="SM_logo.png" alt="SM Logo" width="150" height="150">
+  <h2>SM Customer Experience Survey</h2>
+  <br>
+
+  <form id="googleForm">
+
+    <fieldset>
+      <legend>Personal Information</legend>
+      <div class="personalInfo">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required><br>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" min="10" max="100" required><br>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Service Rating</legend>
+      <p>How satisfied are you with your shopping experience?</p>
+      <input type="radio" id="very_satisfied" name="rating" value="very_satisfied" required>
+      <label for="very_satisfied">Very Satisfied</label><br>
+
+      <input type="radio" id="satisfied" name="rating" value="satisfied">
+      <label for="satisfied">Satisfied</label><br>
+
+      <input type="radio" id="neutral" name="rating" value="neutral">
+      <label for="neutral">Neutral</label><br>
+
+      <input type="radio" id="dissatisfied" name="rating" value="dissatisfied">
+      <label for="dissatisfied">Dissatisfied</label><br><br>
+
+      <p>What features do you use? (Check all that apply):</p>
+      <input type="checkbox" id="chat" name="feature" value="chat">
+      <label for="chat">Live Chat</label><br>
+
+      <input type="checkbox" id="support" name="feature" value="support">
+      <label for="support">Email Support</label><br>
+
+      <input type="checkbox" id="faq" name="feature" value="faq">
+      <label for="faq">FAQs</label><br><br>
+
+     <p>Preferred Contact Method:</p>
+      <select id="contact_method" name="contact_method" required>
+        <option value="">--Please choose--</option>
+        <option value="email">Email</option>
+        <option value="phone">Phone</option>
+        <option value="chat">Live Chat</option>
+      </select><br>
+    </fieldset>
+
+    <fieldset>
+      <legend>Additional Feedback</legend>
+      <label for="comments">Any Comments?</label><br>
+      <textarea id="comments" name="comments" rows="5" cols="40" placeholder="Tell us how we can improve..."></textarea>
+    </fieldset>
+
+    <div class="buttons">
+      <p>Thank you for shopping with us!</p>
+      <input type="reset" value="Reset Form" class="reset">
+      <input type="submit" value="Submit Survey" class="submit">
+    </div>
+  </form>
+
+    <script>
+
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwR7UpY_gQlQY4fgkdqU0X0gsKQQuvpaWjjjj4AbYrXU8IR1HWhRhLDTSInX9oxXVXi/exec';
+    const form = document.getElementById('googleForm');
+
+ 
+
+  //When the user clicks the submit button, this function runs.
+
+    form.addEventListener('submit', e => {
+
+    e.preventDefault(); //This stops the browser’s default action of reloading
+
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+
+      .then(response => {
+
+        alert("Form submitted successfully!");
+
+        form.reset();
+
+      })
+
+      .catch(error => alert('Error!', error.message));
+
+    });
+
+  </script>
+
+</body>
+</html>
